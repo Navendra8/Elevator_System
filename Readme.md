@@ -126,10 +126,71 @@ API Endpoints
 
 Testing
 -------
-- Run the test suite to check the functionality:
-  ```
-  python manage.py test
-  ```
+To test the existing code and API endpoints, you can use the `curl` command-line tool or other API testing tools like Postman or Insomnia. Let's go through some examples of how to test the API endpoints:
+
+1. Initialize Elevator System:
+   Send a POST request to initialize the elevator system with 'n' elevators. For example, to initialize 3 elevators, you can use the following `curl` command:
+
+   ```bash
+   curl -X POST http://localhost:8000/api/elevators/initialize_elevator_system/ -H "Content-Type: application/json" -d '{"num_elevators": 3}'
+   ```
+
+2. Get All Elevators:
+   To fetch all elevators, send a GET request to the following endpoint:
+
+   ```bash
+   curl -X GET http://localhost:8000/api/elevators/
+   ```
+
+3. Get All Floors:
+   To fetch all floors, send a GET request to the following endpoint:
+
+   ```bash
+   curl -X GET http://localhost:8000/api/floors/
+   ```
+
+4. Get All User Requests:
+   To fetch all user requests, send a GET request to the following endpoint:
+
+   ```bash
+   curl -X GET http://localhost:8000/api/user-requests/
+   ```
+
+5. Add User Request:
+   To add a user request, send a POST request with the floor number and direction as JSON data. For example:
+
+   ```bash
+   curl -X POST http://localhost:8000/api/user-requests/ -H "Content-Type: application/json" -d '{"floor": 3, "direction": "UP"}'
+   ```
+
+6. Fetch Next Destination Floor for Elevator:
+   To get the next destination floor for a specific elevator (here, the elevator with ID 1), send a GET request as follows:
+
+   ```bash
+   curl -X GET http://localhost:8000/api/elevators/1/next-destination/
+   ```
+
+7. Mark Elevator as Not Working:
+   To mark an elevator (here, the elevator with ID 1) as not working, send a PATCH request:
+
+   ```bash
+   curl -X PATCH http://localhost:8000/api/elevators/1/mark-not-working/
+   ```
+
+8. Open/Close Elevator Door:
+   To open or close the door of an elevator (here, the elevator with ID 1), send PATCH requests as follows:
+
+   ```bash
+   curl -X PATCH http://localhost:8000/api/elevators/1/open-door/
+   curl -X PATCH http://localhost:8000/api/elevators/1/close-door/
+   ```
+
+Note: Make sure to replace `http://localhost:8000/` with the appropriate URL if your server is running on a different host or port.
+
+After sending these `curl` commands, you should receive responses from the server indicating the success or failure of the operations. The responses will contain the relevant data, such as elevator details, floor details, user request details, etc.
+
+You can also use tools like Postman or Insomnia to test the API endpoints interactively with a more user-friendly interface
+
 
 Contributing
 ------------
